@@ -81,7 +81,7 @@ class Http {
       Log.e(response.data["error"]);
       return HttpResponse.n(response.data["code"], response.data["error"]);
     }
-    if (T == String) {
+    if (T == String || T == int) {
       return HttpResponse(response.data["code"], response.data["message"], response.data["data"]);
     } else if (T == NullResponse) {
       return HttpResponse.n(response.data["code"], response.data["message"]);

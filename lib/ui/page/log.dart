@@ -25,7 +25,7 @@ class _LogPageState extends State<LogPage> {
                 child: SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     child: Text(
-                      _log,
+                      _log.split("\n").reversed.join("\n"),
                       overflow: TextOverflow.visible,
                       maxLines: null,
                     )))));

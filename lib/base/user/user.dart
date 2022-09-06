@@ -11,6 +11,8 @@ class UserInfo{
   String password = "";
   String baseUrl = "";
 
+  bool isAdmin = false;
+
   bool isInit = false;
 
   String pushRegisterId = "";
@@ -33,7 +35,9 @@ class UserInfo{
 
   static Future<void> check()async{
     var isLogin = await Api.checkLogin(getInfo().token);
-    getInfo().isLogin = isLogin;
+    UserInfo.getInfo().isAdmin = isLogin == 1;
+    Log.d(UserInfo.getInfo().isAdmin);
+    getInfo().isLogin = isLogin != -1;
   }
 
   static Future<void> initUserInfo()async{

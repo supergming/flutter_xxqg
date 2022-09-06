@@ -17,6 +17,7 @@ class TokenInterceptor implements Interceptor{
     options.headers["User-Agent"] = "study_xxqg-app";
     options.headers["Content-Type"] = "application/json;charset=UTF-8";
     options.headers["xxqg_token"] =  UserInfo.getInfo().token;
+    options.headers["Authorization"] =  "Bearer ${UserInfo.getInfo().token}";
     handler.next(options);
   }
 

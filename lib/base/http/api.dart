@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:study_xxqg/base/http/resp/nullResponse.dart';
 import 'package:study_xxqg/base/http/url.dart';
 import 'package:study_xxqg/base/log/log.dart';
+import 'package:study_xxqg/base/model/Config.dart';
 import 'package:study_xxqg/base/model/Genrate.dart';
 import 'package:study_xxqg/base/model/QrCode.dart';
 import 'package:study_xxqg/base/model/SignBean.dart';
@@ -38,6 +39,13 @@ class Api{
       return [];
     }
   }
+
+  // 删除用户
+  static Future<bool> deleteUser(String uid)async{
+    var resp = await Http.delete<NullResponse>("/user?uid=$uid");
+    return resp.isSuccess();
+  }
+
   // 添加用户
   static Future<bool> addUser(String code,String state)async{
     var resp = await Http.post<String>(URL.user,params: {"register_id":UserInfo.getInfo().pushRegisterId},data: {"code":code,"state":state});
@@ -89,12 +97,13 @@ class Api{
   }
 
   // 检查登录情况
-  static Future<bool> checkLogin(String token)async{
+  static Future<int> checkLogin(String token)async{
     if (token == ""){
-      return false;
+      return -1;
     }
-    var resp = await Http.post<NullResponse>("/auth/check/$token");
-    return resp.isSuccess();
+    var resp = await Http.post<int>("/auth/check/$token");
+    Log.d(resp.bean);
+    return resp.bean ?? -1;
   }
 
 
@@ -102,6 +111,31 @@ class Api{
   static Future<String> score(String token)async{
     var resp = await Http.get<String>(URL.score,params: {"token":token});
 
+    return resp.bean ?? "";
+  }
+
+  static Future<Config> getConfig()async{
+    var resp = await Http.get<Config>(URL.config);
+    return resp.bean!;
+  }
+
+  static Future<bool> setConfig(Config config)async{
+    var resp = await Http.post<NullResponse>(URL.config,data: config);
+    return resp.isSuccess();
+  }
+
+  static Future<bool> restart()async{
+    var resp = await Http.post<NullResponse>(URL.restart);
+    return resp.isSuccess();
+  }
+
+  static Future<bool> update()async{
+    var resp = await Http.post<NullResponse>(URL.update);
+    return resp.isSuccess();
+  }
+
+  static Future<String> getAbout()async{
+    var resp = await Http.get<String>(URL.about);
     return resp.bean ?? "";
   }
 

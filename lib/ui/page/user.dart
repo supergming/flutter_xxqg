@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:study_xxqg/base/http/api.dart';
 import 'package:study_xxqg/base/log/log.dart';
 import 'package:study_xxqg/base/model/UserInfoBean.dart';
 import 'package:date_format/date_format.dart';
+import 'package:study_xxqg/base/user/user.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -12,7 +14,10 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
-  
+
+
+
+
   List<UserInfoBean> _list = [];
 
 
@@ -29,8 +34,8 @@ class _UserPageState extends State<UserPage> {
         onRefresh: onRefresh,
         child: ListView.builder(itemBuilder: (BuildContext context,int index){
               return InkWell(
-                onTap: () {
-
+                onLongPress: (){
+                  deleteUser(context,_list[index].uid ?? "");
                 },
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -176,6 +181,36 @@ class _UserPageState extends State<UserPage> {
       await Api.startStudy(uid);
     }
     await onRefresh();
+  }
+  
+  void deleteUser(BuildContext ctx, String uid)async{
+    if (UserInfo.getInfo().isAdmin){
+      var dialog = AlertDialog(title: const Text("确认删除"),content: Text("你确认要删除该用户吗？"),actions:  <Widget>[
+        TextButton(
+          child: const Text('取消'),
+          onPressed: (){
+            Navigator.of(context).pop();//关闭弹框
+          },
+        ),
+        TextButton(
+          child: const Text("确认"),
+          onPressed: (){
+            Api.deleteUser(uid).then((value) => {
+              if (value){
+                Fluttertoast.showToast(msg: "删除成功！"),
+                onRefresh()
+              }
+            });
+            Navigator.of(context).pop();//关闭弹框
+          },
+        )
+      ]);
+      showDialog(context: ctx, builder: (ctx){
+        return dialog;
+      });
+    }else{
+      Fluttertoast.showToast(msg: "非管理员用户！");
+    }
   }
 
   void showScore(BuildContext ctx, String token)async{

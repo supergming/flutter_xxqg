@@ -23,4 +23,12 @@ class URL{
 
   // 查询成绩
   static String score = "/score";
+
+  static String config = "/config";
+
+  static String restart = "/restart";
+
+  static String update = "/update";
+
+  static String about = "/about";
 }

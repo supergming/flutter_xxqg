@@ -1,5 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+import 'package:study_xxqg/base/model/Config.dart';
 import 'package:study_xxqg/base/model/Genrate.dart';
 import 'package:study_xxqg/base/model/QrCode.dart';
 import 'package:study_xxqg/base/model/SignBean.dart';
@@ -20,6 +21,10 @@ class JsonConversion$Bean {
 
     String type = M.toString();
 
+    if(type == (Config).toString()){
+      return Config.jsonConversion(json)  as M;
+    }
+    
     if(type == (Generate).toString()){
       return Generate.jsonConversion(json)  as M;
     }
@@ -40,7 +45,11 @@ class JsonConversion$Bean {
   }
 
   static M _getListChildType<M>(List<dynamic> data) {
-      if(<Generate>[] is M){
+      if(<Config>[] is M){
+      return data.map<Config>((e) => Config.jsonConversion(e)).toList() as M;
+    }
+    
+    if(<Generate>[] is M){
       return data.map<Generate>((e) => Generate.jsonConversion(e)).toList() as M;
     }
     
