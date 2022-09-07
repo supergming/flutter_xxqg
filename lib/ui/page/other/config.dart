@@ -17,6 +17,7 @@ class _ConfigPageState extends State<ConfigPage> {
   Config? _config;
 
   void onSave(BuildContext ctx)async{
+    Log.d(_config!.cron);
     var dialog = AlertDialog(title: const Text("确认修改"),content: const Text("你确认要修改配置文件吗？\n将会覆盖默认生成的配置文件！"),actions:  <Widget>[
       TextButton(
         child: const Text('取消'),
@@ -71,10 +72,10 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.number,
               onChanged: (value){
-                setState(() {
                   _config!.model = 1;
-                });
+
               },
+
               // enabled: !PlatformUtils.isWeb,
             ),
 
@@ -89,9 +90,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.logLevel = value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ),
@@ -110,9 +111,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.url,
               onChanged: (value){
-                setState((){
+
                   _config!.scheme = value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ),
@@ -127,9 +128,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.cron = value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ),
@@ -144,9 +145,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.number,
               onChanged: (value){
-                setState((){
+
                   _config!.cronRandomWait = int.parse(value);
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ),
@@ -161,9 +162,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.edgePath = value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ),
@@ -188,9 +189,9 @@ class _ConfigPageState extends State<ConfigPage> {
                       child: Align(
                           alignment: FractionalOffset.centerRight,
                           child: Switch(value: _config!.showBrowser,onChanged: (value){
-                            setState(() {
+
                               _config!.showBrowser = value;
-                            });
+
                           },)
                       ))
                 ],
@@ -215,9 +216,9 @@ class _ConfigPageState extends State<ConfigPage> {
                       child: Align(
                           alignment: FractionalOffset.centerRight,
                           child: Switch(value: _config!.qrCode,onChanged: (value){
-                            setState(() {
+
                               _config!.qrCode = value;
-                            });
+
                           },)
                       ))
                 ],
@@ -244,9 +245,9 @@ class _ConfigPageState extends State<ConfigPage> {
                       child: Align(
                           alignment: FractionalOffset.centerRight,
                           child: Switch(value: _config!.reverseOrder,onChanged: (value){
-                            setState(() {
+
                               _config!.reverseOrder = value;
-                            });
+
                           },)
                       ))
                 ],
@@ -272,9 +273,9 @@ class _ConfigPageState extends State<ConfigPage> {
                       child: Align(
                           alignment: FractionalOffset.centerRight,
                           child: Switch(value: _config!.hotReload,onChanged: (value){
-                            setState(() {
+
                               _config!.hotReload = value;
-                            });
+
                           },)
                       ))
                 ],
@@ -303,9 +304,9 @@ class _ConfigPageState extends State<ConfigPage> {
                       child: Align(
                           alignment: FractionalOffset.centerRight,
                           child: Switch(value: _config!.tg.enable,onChanged: (value){
-                            setState(() {
+
                               _config!.tg.enable = value;
-                            });
+
                           },)
                       ))
                 ],
@@ -322,9 +323,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.number,
               onChanged: (value){
-                setState((){
+
                   _config!.tg.chatId = int.parse(value);
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -338,9 +339,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.tg.token = value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -354,9 +355,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.tg.proxy = value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -370,9 +371,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.tg.customApi = value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -391,9 +392,9 @@ class _ConfigPageState extends State<ConfigPage> {
                 value.split("&").forEach((element) {
                   whiteList.add(int.parse(element));
                 });
-                setState((){
+
                   _config!.tg.whiteList = whiteList;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -421,9 +422,9 @@ class _ConfigPageState extends State<ConfigPage> {
                       child: Align(
                           alignment: FractionalOffset.centerRight,
                           child: Switch(value: _config!.web.enable,onChanged: (value){
-                            setState(() {
+
                               _config!.web.enable = value;
-                            });
+
                           },)
                       ))
                 ],
@@ -440,9 +441,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.web.host = value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -456,9 +457,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.web.port = int.parse(value);
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -472,9 +473,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.web.account = value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -489,9 +490,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.web.password = value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -506,9 +507,9 @@ class _ConfigPageState extends State<ConfigPage> {
                 return data.join("&");
               })()),
               decoration: const InputDecoration(
-                labelText: "web端管理员密码",
+                labelText: "web端普通用户配置",
                 labelStyle: TextStyle(fontSize: 20),
-                hintText: "web端管理员密码,账号与密码之间用冒号连接，多个账号用&连接",
+                hintText: "web端跑一趟用户配置,账号与密码之间用冒号连接，多个账号用&连接",
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
@@ -519,9 +520,9 @@ class _ConfigPageState extends State<ConfigPage> {
                   data[element.split(":")[0]] = element.split(":")[1];
                 }
 
-                setState((){
+
                   _config!.web.commonUser = data;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -549,9 +550,9 @@ class _ConfigPageState extends State<ConfigPage> {
                       child: Align(
                           alignment: FractionalOffset.centerRight,
                           child: Switch(value: _config!.wechat.enable,onChanged: (value){
-                            setState(() {
+
                               _config!.wechat.enable = value;
-                            });
+
                           },)
                       ))
                 ],
@@ -568,9 +569,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.wechat.token = value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -584,9 +585,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.wechat.secret = value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -600,9 +601,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.wechat.appId = value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -617,9 +618,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.wechat.loginTempId = value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -633,9 +634,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.wechat.normalTempId = value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -649,9 +650,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.wechat.superOpenId = value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -678,9 +679,9 @@ class _ConfigPageState extends State<ConfigPage> {
                       child: Align(
                           alignment: FractionalOffset.centerRight,
                           child: Switch(value: _config!.pushDeer.enable,onChanged: (value){
-                            setState(() {
+
                               _config!.pushDeer.enable = value;
-                            });
+
                           },)
                       ))
                 ],
@@ -697,9 +698,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.pushDeer.api = value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -713,9 +714,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.pushDeer.token= value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -742,9 +743,9 @@ class _ConfigPageState extends State<ConfigPage> {
                       child: Align(
                           alignment: FractionalOffset.centerRight,
                           child: Switch(value: _config!.push.ding.enable,onChanged: (value){
-                            setState(() {
+
                               _config!.push.ding.enable = value;
-                            });
+
                           },)
                       ))
                 ],
@@ -761,9 +762,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.push.ding.accessToken = value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -777,9 +778,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.push.ding.secret= value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -807,9 +808,9 @@ class _ConfigPageState extends State<ConfigPage> {
                       child: Align(
                           alignment: FractionalOffset.centerRight,
                           child: Switch(value: _config!.push.pushPlus.enable,onChanged: (value){
-                            setState(() {
+
                               _config!.push.pushPlus.enable = value;
-                            });
+
                           },)
                       ))
                 ],
@@ -826,9 +827,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.push.pushPlus.token = value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ) : const SizedBox(),
@@ -846,9 +847,9 @@ class _ConfigPageState extends State<ConfigPage> {
               ),
               keyboardType: TextInputType.text,
               onChanged: (value){
-                setState((){
+
                   _config!.customCron= value;
-                });
+
               },
               // enabled: !PlatformUtils.isWeb,
             ),
@@ -862,9 +863,9 @@ class _ConfigPageState extends State<ConfigPage> {
           ),
           keyboardType: TextInputType.text,
           onChanged: (value){
-            setState((){
+
               _config!.customMessage= value;
-            });
+
           },
           // enabled: !PlatformUtils.isWeb,
         ),
