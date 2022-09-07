@@ -19,7 +19,7 @@ jobs:
       # 拉取项目代码
       - uses: actions/checkout@v2
       - name: Set env
-        run: echo ::set-env name=RELEASE_VERSION::${GITHUB_REF#refs/*/}
+        run: echo ::set-output name=RELEASE_VERSION::${GITHUB_REF#refs/*/}
       # 建立 java 环境
       - name: Setup Java JDK
         uses: actions/setup-java@v2
@@ -31,7 +31,7 @@ jobs:
         uses: subosito/flutter-action@v1.5.3
         with:
           channel: "stable"
-          flutter-version: "2.2.x"
+          flutter-version: "3.3.0"
       # 下载项目依赖
       - run: flutter pub get
       # 执行测试
